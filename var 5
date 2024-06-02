@@ -1,13 +1,23 @@
 #include <iostream>
 
-// Промежуточная версия рекурсивной функции для вычисления a^n
+// Итоговая версия рекурсивной функции для вычисления a^n
 double power(double a, int n) {
     // Базовый случай: a^0 = 1
     if (n == 0) {
         return 1.0;
     }
-    // Рекурсивный случай: a^n = a * a^(n-1)
-    return a * power(a, n - 1);
+    // Базовый случай: a^1 = a
+    if (n == 1) {
+        return a;
+    }
+    // Рекурсивный случай: если n четное, то используем a^(n/2) * a^(n/2)
+    if (n % 2 == 0) {
+        double halfPower = power(a, n / 2);
+        return halfPower * halfPower;
+    } else {
+        // Если n нечетное, то a^n = a * a^(n-1)
+        return a * power(a, n - 1);
+    }
 }
 
 int main() {
