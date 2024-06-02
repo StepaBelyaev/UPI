@@ -1,0 +1,26 @@
+#include <iostream>
+
+// Промежуточная версия рекурсивной функции для вычисления a^n
+double power(double a, int n) {
+  
+}
+
+int main() {
+    double a;
+    int n;
+
+    std::cout << "Введите число a: ";
+    std::cin >> a;
+    std::cout << "Введите натуральное число n: ";
+    std::cin >> n;
+
+    if (n < 0) {
+        std::cout << "Ошибка: n должно быть натуральным числом (n >= 0)." << std::endl;
+        return 1;
+    }
+
+    double result = power(a, n);
+    std::cout << a << " в степени " << n << " равно " << result << std::endl;
+
+    return 0;
+}
