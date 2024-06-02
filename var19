@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <limits>
+
+struct Date {
+    int year;
+    int month;
+    int day;
+};
+
+struct Grade {
+    std::string subject;
+    Date examDate;
+    std::string teacherName;
+    int score;
+};
+
+struct Student {
+    std::string lastName;
+    std::string firstName;
+    Date birthDate;
+    std::vector<Grade> grades;
+};
+Student inputStudent() {};
+void printStudent(const Student& student) {}
+Student findWorstStudent(const std::vector<Student>& students) {};
+
+int main() {
+    int numStudents;
+    std::cout << "Введите количество студентов: ";
+    std::cin >> numStudents;
+
+    std::vector<Student> students(numStudents);
+    for (int i = 0; i < numStudents; ++i) {
+        std::cout << "Введите данные для студента " << i + 1 << ":" << std::endl;
+        students[i] = inputStudent();
+    }
+
+    // Вывод данных всех студентов для проверки ввода
+    for (const auto& student : students) {
+        printStudent(student);
+    }
+
+    return 0;
+}
