@@ -22,9 +22,48 @@ struct Student {
     Date birthDate;
     std::vector<Grade> grades;
 };
-Student inputStudent() {};
-void printStudent(const Student& student) {}
-Student findWorstStudent(const std::vector<Student>& students) {};
+
+// Функция для ввода данных о студенте
+Student inputStudent() {
+    Student student;
+
+    std::cout << "Введите фамилию студента: ";
+    std::cin >> student.lastName;
+    std::cout << "Введите имя студента: ";
+    std::cin >> student.firstName;
+    std::cout << "Введите дату рождения (год месяц день): ";
+    std::cin >> student.birthDate.year >> student.birthDate.month >> student.birthDate.day;
+
+    int numSubjects;
+    std::cout << "Введите количество предметов (от 3 до 5): ";
+    std::cin >> numSubjects;
+    student.grades.resize(numSubjects);
+
+    for (int i = 0; i < numSubjects; ++i) {
+        std::cout << "Введите название предмета: ";
+        std::cin >> student.grades[i].subject;
+        std::cout << "Введите дату экзамена (год месяц день): ";
+        std::cin >> student.grades[i].examDate.year >> student.grades[i].examDate.month >> student.grades[i].examDate.day;
+        std::cout << "Введите ФИО преподавателя: ";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::getline(std::cin, student.grades[i].teacherName);
+        std::cout << "Введите оценку: ";
+        std::cin >> student.grades[i].score;
+    }
+
+    return student;
+}
+
+// Функция для вывода данных о студенте
+void printStudent(const Student& student) {
+    std::cout << "Фамилия: " << student.lastName << ", Имя: " << student.firstName << std::endl;
+    std::cout << "Дата рождения: " << student.birthDate.year << "-" << student.birthDate.month << "-" << student.birthDate.day << std::endl;
+
+    for (const auto& grade : student.grades) {
+        std::cout << "Предмет: " << grade.subject << ", Дата экзамена: " << grade.examDate.year << "-" << grade.examDate.month << "-" << grade.examDate.day 
+                  << ", Преподаватель: " << grade.teacherName << ", Оценка: " << grade.score << std::endl;
+    }
+}
 
 int main() {
     int numStudents;
@@ -44,3 +83,4 @@ int main() {
 
     return 0;
 }
+
