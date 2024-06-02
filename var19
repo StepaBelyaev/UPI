@@ -65,6 +65,27 @@ void printStudent(const Student& student) {
     }
 }
 
+// Функция для поиска студента с самой худшей успеваемостью
+Student findWorstStudent(const std::vector<Student>& students) {
+    Student worstStudent;
+    int worstAverage = std::numeric_limits<int>::max();
+
+    for (const auto& student : students) {
+        int totalScore = 0;
+        for (const auto& grade : student.grades) {
+            totalScore += grade.score;
+        }
+        int averageScore = totalScore / student.grades.size();
+
+        if (averageScore < worstAverage) {
+            worstAverage = averageScore;
+            worstStudent = student;
+        }
+    }
+
+    return worstStudent;
+}
+
 int main() {
     int numStudents;
     std::cout << "Введите количество студентов: ";
@@ -76,10 +97,16 @@ int main() {
         students[i] = inputStudent();
     }
 
-    // Вывод данных всех студентов для проверки ввода
-    for (const auto& student : students) {
-        printStudent(student);
-    }
+    // Нахождение студента с самой худшей успеваемостью
+    Student worstStudent = findWorstStudent(students);
+
+    // Вывод информации о студенте с самой худшей успеваемостью
+    std::cout << "Студент с самой худшей успеваемостью:" << std::endl;
+    printStudent(worstStudent);
+
+    return 0;
+}
+
 
     return 0;
 }
